@@ -46,6 +46,19 @@ func (m *Manager) Alive() ([]*Proxy, error) {
 	return alive, nil
 }
 
+// RemoveBadProxies removes the proxies in the Manager with status "BAD".
+func (m *Manager) RemoveBadProxies() {
+	// Make a new slice with not bad proxies. Using this method instead of index
+	// swapping, so we don't end up changing the index' while for range.
+	var ps []*Proxy
+	for _, p := range m.Proxies {
+		if p.Status != BAD {
+			ps = append(ps, p)
+		}
+	}
+	m.Proxies = ps
+}
+
 // AppendProxiesFromReader appends proxies from an io.Reader using a scanner.
 // First argument specifies the protocol of the proxies.
 // These should be proxy.HTTP, proxy.SOCKS4 or proxy.SOCKS5.
