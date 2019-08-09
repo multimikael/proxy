@@ -1,18 +1,9 @@
-# proxy
-[![GoDoc](https://godoc.org/github.com/multimikael/proxy?status.png)](http://godoc.org/github.com/multimikael/proxy)
+/*
+whoami example of using the proxy manager. Please note that this program
+connects to CloudFlare's server (https://www.cloudflare.com/cdn-cgi/trace).
+This example cannot be ran without a text file "proxies.txt" with HTTP proxy.
+*/
 
-proxy is a simple proxy manager library. It supports HTTP(s)/SOCK4(a)/SOCKS5.
-
-
-# Installation
-proxy can be installed using `go get`:
-```sh
-go get github.com/multimikael/proxy
-```
-
-# Example
-This is a simple example of using the proxy manager and ClientFromProxy. This example reads HTTP proxies from a text file "proxies.txt". It gets a proxy from the manager and passes it to ClientFromProxy to get an HTTP client. Finally it makes a GET request through the proxy. This a cut from the whoami example in the [examples folder](https://github.com/multimikael/proxy/examples).
-```go
 package main
 
 import (
@@ -48,4 +39,3 @@ func main() {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println(string(body))
 }
-```
