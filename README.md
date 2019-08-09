@@ -11,7 +11,7 @@ go get github.com/multimikael/proxy
 ```
 
 # Example
-This is a simple example of using the proxy manager and ClientFromProxy. This example reads HTTP proxies from a text file "proxies.txt". It gets a proxy from the manager and passes it to ClientFromProxy to get an HTTP client. Finally it makes a GET request through the proxy. This a cut from the whoami example in the [examples folder](https://github.com/multimikael/proxy/examples).
+This is a simple example of using the proxy manager and ClientFromProxy. This example reads HTTP proxies from a text file "proxies.txt". It gets a proxy from the manager and passes it to ClientFromProxy to get an HTTP client. Finally it makes a GET request through the proxy. This a cut from the whoami example in the [examples folder](https://github.com/multimikael/proxy/tree/master/examples/).
 ```go
 package main
 
