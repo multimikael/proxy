@@ -15,7 +15,15 @@ import (
 // Manager is struct type containing proxies
 type Manager struct {
 	Proxies []*Proxy
+	Status  int
 }
+
+// OK and LOCKED are possible status for the proxy manager. Locked will prevent
+// clients from getting any proxies.
+const (
+	OK = iota
+	LOCKED
+)
 
 // NewManager returns a new proxy manager. Seeds the PRNG with UnixNano time.
 func NewManager() Manager {
@@ -25,6 +33,12 @@ func NewManager() Manager {
 
 // Get returns a new Proxy. Can be used with ClientFromProxy to get HTTP client.
 func (m *Manager) Get() (*Proxy, error) {
+	// If the manager is locked, pause goroutine for 200ms and try again.
+	if m.Status == LOCKED {
+		time.Sleep(200 * time.Millisecond)
+		return m.Get()
+	}
+
 	proxies, err := m.Alive()
 	if err != nil {
 		return &Proxy{}, err
