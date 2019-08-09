@@ -43,6 +43,9 @@ func (m *Manager) Get() (*Proxy, error) {
 	if err != nil {
 		return &Proxy{}, err
 	}
+	if len(proxies) == 1 {
+		return proxies[0], nil
+	}
 	return proxies[rand.Intn(len(proxies)-1)], nil
 }
 
