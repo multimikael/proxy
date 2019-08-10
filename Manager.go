@@ -43,6 +43,9 @@ func (m *Manager) Get() (*Proxy, error) {
 	if err != nil {
 		return &Proxy{}, err
 	}
+	if len(proxies) == 0 {
+		return &Proxy{}, errors.New("No alive proxies")
+	}
 	if len(proxies) == 1 {
 		return proxies[0], nil
 	}
