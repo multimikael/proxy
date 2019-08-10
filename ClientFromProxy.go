@@ -5,6 +5,7 @@ import (
 	"net"
 	"net/http"
 	"net/url"
+	"strconv"
 	"time"
 
 	"h12.io/socks"
@@ -35,7 +36,7 @@ func ClientFromProxy(p *Proxy, timeout time.Duration) (*http.Client, error) {
 		uri := url.URL{
 			Scheme:   "socks4",
 			Host:     p.Host + ":" + p.Port,
-			RawQuery: "timeout=" + string(timeout) + "s",
+			RawQuery: "timeout=" + strconv.FormatInt(int64(timeout), 10) + "s",
 		}
 		dialSocksProxy := socks.Dial(uri.String())
 		tr := &http.Transport{Dial: dialSocksProxy}
@@ -44,7 +45,7 @@ func ClientFromProxy(p *Proxy, timeout time.Duration) (*http.Client, error) {
 		uri := url.URL{
 			Scheme:   "socks5",
 			Host:     p.Host + ":" + p.Port,
-			RawQuery: "timeout=" + string(timeout) + "s",
+			RawQuery: "timeout=" + strconv.FormatInt(int64(timeout), 10) + "s",
 		}
 		dialSocksProxy := socks.Dial(uri.String())
 		tr := &http.Transport{Dial: dialSocksProxy}
