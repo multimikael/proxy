@@ -30,19 +30,19 @@ func main() {
 	// Get a random alive proxy from the proxy manager
 	p, err := pm.Get()
 	if err != nil {
-		panic(err.Error())
+		panic(err)
 	}
 
 	// Get an HTTP client with the proxy, and timeout after 10 seconds
 	client, err := proxy.ClientFromProxy(p, 10)
 	if err != nil {
-		panic(err.Error())
+		panic(err)
 	}
 
 	// Make a GET request through the proxy
 	resp, err := client.Get("https://www.cloudflare.com/cdn-cgi/trace")
 	if err != nil {
-		panic(err.Error())
+		panic(err)
 	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
